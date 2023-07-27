@@ -1,17 +1,13 @@
-//
-//  WalletApp.swift
-//  Wallet
-//
-//  Created by Ronierison Maciel on 27/07/23.
-//
-
 import SwiftUI
 
 @main
 struct WalletApp: App {
+    // Criar uma instância de Carteira
+    @StateObject var carteira = Carteira(saldo: 0.0, gastos: [])
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TelaInicialView(carteira: carteira)
         }
     }
 }

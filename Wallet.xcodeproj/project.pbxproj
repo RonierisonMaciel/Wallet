@@ -8,17 +8,29 @@
 
 /* Begin PBXBuildFile section */
 		E64B08942A73138200C2786B /* WalletApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08932A73138200C2786B /* WalletApp.swift */; };
-		E64B08962A73138200C2786B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08952A73138200C2786B /* ContentView.swift */; };
 		E64B08982A73138400C2786B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E64B08972A73138400C2786B /* Assets.xcassets */; };
 		E64B089B2A73138400C2786B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E64B089A2A73138400C2786B /* Preview Assets.xcassets */; };
+		E64B08B42A73489500C2786B /* model in Resources */ = {isa = PBXBuildFile; fileRef = E64B08B32A73489500C2786B /* model */; };
+		E64B08B62A73489E00C2786B /* view in Resources */ = {isa = PBXBuildFile; fileRef = E64B08B52A73489E00C2786B /* view */; };
+		E64B08BE2A7349E400C2786B /* Carteira.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08BD2A7349E400C2786B /* Carteira.swift */; };
+		E64B08C02A734A1B00C2786B /* TelaInicialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08BF2A734A1B00C2786B /* TelaInicialView.swift */; };
+		E64B08C22A734A4A00C2786B /* TelaGastosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08C12A734A4A00C2786B /* TelaGastosView.swift */; };
+		E64B08C42A734A7400C2786B /* TelaCarteiraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08C32A734A7400C2786B /* TelaCarteiraView.swift */; };
+		E64B08C62A734B5600C2786B /* Gasto.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08C52A734B5600C2786B /* Gasto.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E64B08902A73138200C2786B /* Wallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E64B08932A73138200C2786B /* WalletApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletApp.swift; sourceTree = "<group>"; };
-		E64B08952A73138200C2786B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E64B08972A73138400C2786B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E64B089A2A73138400C2786B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E64B08B32A73489500C2786B /* model */ = {isa = PBXFileReference; lastKnownFileType = folder; path = model; sourceTree = "<group>"; };
+		E64B08B52A73489E00C2786B /* view */ = {isa = PBXFileReference; lastKnownFileType = folder; path = view; sourceTree = "<group>"; };
+		E64B08BD2A7349E400C2786B /* Carteira.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Carteira.swift; path = model/Carteira.swift; sourceTree = "<group>"; };
+		E64B08BF2A734A1B00C2786B /* TelaInicialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TelaInicialView.swift; path = view/TelaInicialView.swift; sourceTree = "<group>"; };
+		E64B08C12A734A4A00C2786B /* TelaGastosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TelaGastosView.swift; path = view/TelaGastosView.swift; sourceTree = "<group>"; };
+		E64B08C32A734A7400C2786B /* TelaCarteiraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TelaCarteiraView.swift; path = view/TelaCarteiraView.swift; sourceTree = "<group>"; };
+		E64B08C52A734B5600C2786B /* Gasto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Gasto.swift; path = model/Gasto.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,9 +64,15 @@
 			isa = PBXGroup;
 			children = (
 				E64B08932A73138200C2786B /* WalletApp.swift */,
-				E64B08952A73138200C2786B /* ContentView.swift */,
+				E64B08B52A73489E00C2786B /* view */,
+				E64B08B32A73489500C2786B /* model */,
 				E64B08972A73138400C2786B /* Assets.xcassets */,
 				E64B08992A73138400C2786B /* Preview Content */,
+				E64B08BD2A7349E400C2786B /* Carteira.swift */,
+				E64B08BF2A734A1B00C2786B /* TelaInicialView.swift */,
+				E64B08C12A734A4A00C2786B /* TelaGastosView.swift */,
+				E64B08C32A734A7400C2786B /* TelaCarteiraView.swift */,
+				E64B08C52A734B5600C2786B /* Gasto.swift */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -125,8 +143,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E64B08B42A73489500C2786B /* model in Resources */,
 				E64B089B2A73138400C2786B /* Preview Assets.xcassets in Resources */,
 				E64B08982A73138400C2786B /* Assets.xcassets in Resources */,
+				E64B08B62A73489E00C2786B /* view in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,8 +157,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E64B08962A73138200C2786B /* ContentView.swift in Sources */,
+				E64B08BE2A7349E400C2786B /* Carteira.swift in Sources */,
+				E64B08C62A734B5600C2786B /* Gasto.swift in Sources */,
+				E64B08C02A734A1B00C2786B /* TelaInicialView.swift in Sources */,
+				E64B08C22A734A4A00C2786B /* TelaGastosView.swift in Sources */,
 				E64B08942A73138200C2786B /* WalletApp.swift in Sources */,
+				E64B08C42A734A7400C2786B /* TelaCarteiraView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
