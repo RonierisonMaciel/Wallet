@@ -86,7 +86,7 @@ struct TelaGastosView: View {
                 case .addExpense:
                     TelaNovoGastoView(carteira: carteira)
                 case .editExpense:
-                    if let index = carteira.gastos.firstIndex(where: { $0.id == carteira.gastos[index].id }) {
+                    if let index = carteira.gastos.firstIndex(where: { $0.id == gasto.id }) {
                         EditarGastoView(gasto: $carteira.gastos[index])
                     }
                 default:

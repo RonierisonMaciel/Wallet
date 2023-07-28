@@ -20,6 +20,7 @@
 		E64B08CA2A73F7A800C2786B /* EditarGastoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08C92A73F7A800C2786B /* EditarGastoView.swift */; };
 		E64B08CC2A73F98800C2786B /* TelaNovoGastoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08CB2A73F98800C2786B /* TelaNovoGastoView.swift */; };
 		E64B08D02A73FA9E00C2786B /* DecimalField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08CF2A73FA9E00C2786B /* DecimalField.swift */; };
+		E64B08D22A74003900C2786B /* ActiveSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08D12A74003900C2786B /* ActiveSheet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		E64B08C92A73F7A800C2786B /* EditarGastoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditarGastoView.swift; path = view/EditarGastoView.swift; sourceTree = "<group>"; };
 		E64B08CB2A73F98800C2786B /* TelaNovoGastoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TelaNovoGastoView.swift; path = view/TelaNovoGastoView.swift; sourceTree = "<group>"; };
 		E64B08CF2A73FA9E00C2786B /* DecimalField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DecimalField.swift; path = view/Components/DecimalField.swift; sourceTree = "<group>"; };
+		E64B08D12A74003900C2786B /* ActiveSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ActiveSheet.swift; path = view/Components/ActiveSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				E64B08C92A73F7A800C2786B /* EditarGastoView.swift */,
 				E64B08CB2A73F98800C2786B /* TelaNovoGastoView.swift */,
 				E64B08CF2A73FA9E00C2786B /* DecimalField.swift */,
+				E64B08D12A74003900C2786B /* ActiveSheet.swift */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -167,6 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E64B08BE2A7349E400C2786B /* Carteira.swift in Sources */,
+				E64B08D22A74003900C2786B /* ActiveSheet.swift in Sources */,
 				E64B08C62A734B5600C2786B /* Gasto.swift in Sources */,
 				E64B08C02A734A1B00C2786B /* TelaInicialView.swift in Sources */,
 				E64B08CC2A73F98800C2786B /* TelaNovoGastoView.swift in Sources */,

@@ -4,7 +4,7 @@ struct TelaNovoGastoView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var carteira: Carteira
     @State private var nome = ""
-    @State private var valorString = ""
+    @State private var valor: Double?
     @State private var tags = [String]()
     @State private var data = Date()
     @State private var showError = false
@@ -13,7 +13,7 @@ struct TelaNovoGastoView: View {
         NavigationView {
             Form {
                 TextField("Nome", text: $nome)
-                DecimalField(title: "Valor", value: $valorString)
+                DecimalField("Valor", value: $valor)
                 
                 DatePicker("Data", selection: $data, displayedComponents: .date)
                 
@@ -24,7 +24,7 @@ struct TelaNovoGastoView: View {
                 
                 Section {
                     Button(action: {
-                        if let valorReal = Double(self.valorString.replacingOccurrences(of: ",", with: ".")) {
+                        if let valorReal = self.valor {
                             let novoGasto = Gasto(id: UUID(), nome: self.nome, valor: valorReal, data: data, tag: tags)
                             carteira.adicionarGasto(gasto: novoGasto)
                             self.presentationMode.wrappedValue.dismiss()
@@ -37,7 +37,7 @@ struct TelaNovoGastoView: View {
                     .alert(isPresented: $showError) {
                         Alert(title: Text("Erro"), message: Text("Não foi possível adicionar este gasto. Verifique os valores e tente novamente."), dismissButton: .default(Text("Entendi")))
                     }
-                    .disabled(nome.isEmpty || valorString.isEmpty) // Desativa o botão se algum campo estiver vazio
+                    .disabled(nome.isEmpty || valor == nil) // Desativa o botão se algum campo estiver vazio
                 }
             }
             .navigationTitle("Nova Despesa")
