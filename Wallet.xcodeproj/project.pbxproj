@@ -17,7 +17,9 @@
 		E64B08C22A734A4A00C2786B /* TelaGastosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08C12A734A4A00C2786B /* TelaGastosView.swift */; };
 		E64B08C42A734A7400C2786B /* TelaCarteiraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08C32A734A7400C2786B /* TelaCarteiraView.swift */; };
 		E64B08C62A734B5600C2786B /* Gasto.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08C52A734B5600C2786B /* Gasto.swift */; };
-		E64B08C82A73EDFB00C2786B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08C72A73EDFB00C2786B /* ContentView.swift */; };
+		E64B08CA2A73F7A800C2786B /* EditarGastoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08C92A73F7A800C2786B /* EditarGastoView.swift */; };
+		E64B08CC2A73F98800C2786B /* TelaNovoGastoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08CB2A73F98800C2786B /* TelaNovoGastoView.swift */; };
+		E64B08D02A73FA9E00C2786B /* DecimalField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08CF2A73FA9E00C2786B /* DecimalField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,7 +34,9 @@
 		E64B08C12A734A4A00C2786B /* TelaGastosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TelaGastosView.swift; path = view/TelaGastosView.swift; sourceTree = "<group>"; };
 		E64B08C32A734A7400C2786B /* TelaCarteiraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TelaCarteiraView.swift; path = view/TelaCarteiraView.swift; sourceTree = "<group>"; };
 		E64B08C52A734B5600C2786B /* Gasto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Gasto.swift; path = model/Gasto.swift; sourceTree = "<group>"; };
-		E64B08C72A73EDFB00C2786B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E64B08C92A73F7A800C2786B /* EditarGastoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditarGastoView.swift; path = view/EditarGastoView.swift; sourceTree = "<group>"; };
+		E64B08CB2A73F98800C2786B /* TelaNovoGastoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TelaNovoGastoView.swift; path = view/TelaNovoGastoView.swift; sourceTree = "<group>"; };
+		E64B08CF2A73FA9E00C2786B /* DecimalField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DecimalField.swift; path = view/Components/DecimalField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +79,9 @@
 				E64B08C12A734A4A00C2786B /* TelaGastosView.swift */,
 				E64B08C32A734A7400C2786B /* TelaCarteiraView.swift */,
 				E64B08C52A734B5600C2786B /* Gasto.swift */,
-				E64B08C72A73EDFB00C2786B /* ContentView.swift */,
+				E64B08C92A73F7A800C2786B /* EditarGastoView.swift */,
+				E64B08CB2A73F98800C2786B /* TelaNovoGastoView.swift */,
+				E64B08CF2A73FA9E00C2786B /* DecimalField.swift */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -162,8 +168,10 @@
 			files = (
 				E64B08BE2A7349E400C2786B /* Carteira.swift in Sources */,
 				E64B08C62A734B5600C2786B /* Gasto.swift in Sources */,
-				E64B08C82A73EDFB00C2786B /* ContentView.swift in Sources */,
 				E64B08C02A734A1B00C2786B /* TelaInicialView.swift in Sources */,
+				E64B08CC2A73F98800C2786B /* TelaNovoGastoView.swift in Sources */,
+				E64B08CA2A73F7A800C2786B /* EditarGastoView.swift in Sources */,
+				E64B08D02A73FA9E00C2786B /* DecimalField.swift in Sources */,
 				E64B08C22A734A4A00C2786B /* TelaGastosView.swift in Sources */,
 				E64B08942A73138200C2786B /* WalletApp.swift in Sources */,
 				E64B08C42A734A7400C2786B /* TelaCarteiraView.swift in Sources */,

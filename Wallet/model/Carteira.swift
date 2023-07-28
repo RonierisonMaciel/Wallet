@@ -14,8 +14,14 @@ class Carteira: ObservableObject {
     }
     
     func adicionarGasto(gasto: Gasto) {
-        gastos.append(gasto)
-        saldo -= gasto.valor
+        // Verifica se o saldo é suficiente antes de adicionar o gasto
+        if saldo >= gasto.valor {
+            gastos.append(gasto)
+            saldo -= gasto.valor
+        } else {
+            // Ação ou mensagem de erro para saldo insuficiente
+            print("Saldo insuficiente para este gasto.")
+        }
     }
     
     func limparGastos() {

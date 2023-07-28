@@ -5,5 +5,5 @@ struct Gasto: Identifiable, Codable {
     var nome: String
     var valor: Double
     var data: Date
-    var tag: String
+    var tag: [String]
 }
