@@ -5,13 +5,8 @@ struct TelaGastosView: View {
     @State private var isSheetPresented = false
     @State private var isEditingExpense = false
     @State private var searchText = ""
-<<<<<<< HEAD
-    @State private var gastoSelecionado: Gasto?  // Adicionado
-    @State private var gastoSelecionadoIndex: Int?  // Adicionado
-=======
     @State private var gastoSelecionado: Gasto?
     @State private var gastoSelecionadoIndex: Int?
->>>>>>> 2ba26ba (Merge remote-tracking branch 'refs/remotes/origin/main')
 
     var total: Double {
         carteira.gastos.reduce(0) { $0 + $1.valor }
@@ -50,11 +45,7 @@ struct TelaGastosView: View {
                     HStack {
                         VStack(alignment: .leading) {
                             Text(gasto.nome)
-<<<<<<< HEAD
-                            Text(gasto.tag.joined(separator: ", "))  // Alterado aqui para exibir tags
-=======
                             Text(gasto.tag.joined(separator: ", "))
->>>>>>> 2ba26ba (Merge remote-tracking branch 'refs/remotes/origin/main')
                                 .font(.footnote)
                                 .foregroundColor(.gray)
                         }
@@ -96,29 +87,11 @@ struct TelaGastosView: View {
             }) {
                 Image(systemName: "plus")
             })
-<<<<<<< HEAD
-            .fullScreenCover(item: $activeSheet) { item in
-                switch item {
-                case .addExpense:
-                    TelaNovoGastoView().environmentObject(carteira)
-                case .editExpense:
-<<<<<<< HEAD
-                    if let index = gastoSelecionadoIndex {
-                        EditarGastoView(gastoIndex: index, carteira: carteira)
-=======
-                    if let gastoParaEditar = gastoSelecionado {
-                        EditarGastoView(gasto: Binding(get: { gastoParaEditar }, set: { gastoSelecionado = $0 })).environmentObject(carteira)
->>>>>>> 2ba26ba (Merge remote-tracking branch 'refs/remotes/origin/main')
-                    } else {
-                        EmptyView()
-                    }
-=======
             .fullScreenCover(isPresented: $isSheetPresented) {
                 if self.isEditingExpense, let gastoParaEditar = self.gastoSelecionado, let gastoIndex = self.gastoSelecionadoIndex {
                     EditarGastoView(gastoParaEditar: gastoParaEditar, index: gastoIndex).environmentObject(self.carteira)
                 } else {
                     TelaNovoGastoView().environmentObject(self.carteira)
->>>>>>> 4b8427c (Merge remote-tracking branch 'refs/remotes/origin/main')
                 }
             }
         }
