@@ -27,6 +27,25 @@ struct TelaGastosView: View {
         }
     }
 
+    var gastosPorMes: [Date: [Gasto]] {
+        Dictionary(grouping: gastosFiltrados) { gasto in
+            let calendar = Calendar.current
+            let components = calendar.dateComponents([.year, .month], from: gasto.data)
+            return calendar.date(from: components)!
+        }
+    }
+
+    var mesesOrdenados: [Date] {
+        gastosPorMes.keys.sorted()
+    }
+
+    let monthYearFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.setLocalizedDateFormatFromTemplate("MMMM yyyy")
+        formatter.locale = Locale.current
+        return formatter
+    }()
+
     var body: some View {
         VStack {
             HStack {
@@ -41,28 +60,31 @@ struct TelaGastosView: View {
             }
             .padding(.top, 20)
             List {
-                ForEach(gastosFiltrados) { gasto in
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(gasto.nome)
-                            Text(gasto.tag.joined(separator: ", "))
-                                .font(.footnote)
-                                .foregroundColor(.gray)
+                ForEach(mesesOrdenados, id: \.self) { mes in
+                    Section(header: Text(monthYearFormatter.string(from: mes))) {
+                        ForEach(gastosPorMes[mes]!, id: \.id) { gasto in
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text(gasto.nome)
+                                    Text(gasto.tag.joined(separator: ", "))
+                                        .font(.footnote)
+                                        .foregroundColor(.gray)
+                                }
+                                .onTapGesture {
+                                    self.gastoSelecionado = gasto
+                                    self.gastoSelecionadoIndex = carteira.gastos.firstIndex(where: { $0.id == gasto.id })
+                                    self.isEditingExpense = true
+                                    self.isSheetPresented = true
+                                }
+                                Spacer()
+                                Text("R$ \(gasto.valor, specifier: "%.2f")")
+                            }
                         }
-                        .onTapGesture {
-                            print("Tocou no gasto")  // Ponto de depuração
-                            self.gastoSelecionado = gasto
-                            self.gastoSelecionadoIndex = carteira.gastos.firstIndex(where: { $0.id == gasto.id })
-                            self.isEditingExpense = true
-                            self.isSheetPresented = true
-                        }
-                        Spacer()
-                        Text("R$ \(gasto.valor, specifier: "%.2f")")
+                        .onDelete(perform: { indexSet in
+                            delete(at: indexSet, from: mes)
+                        })
                     }
                 }
-                .onDelete(perform: { indexSet in
-                    delete(at: indexSet)
-                })
 
                 HStack {
                     Text("Total")
@@ -97,9 +119,9 @@ struct TelaGastosView: View {
         }
     }
 
-    func delete(at offsets: IndexSet) {
+    func delete(at offsets: IndexSet, from month: Date) {
         offsets.forEach { offset in
-            if let index = carteira.gastos.firstIndex(where: { $0.id == gastosFiltrados[offset].id }) {
+            if let index = carteira.gastos.firstIndex(where: { $0.id == gastosPorMes[month]![offset].id }) {
                 carteira.saldo = carteira.saldo + carteira.gastos[index].valor
                 carteira.gastos.remove(at: index)
             }

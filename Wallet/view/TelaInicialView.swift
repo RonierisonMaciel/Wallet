@@ -48,7 +48,7 @@ struct TelaInicialView: View {
                             HStack {
                                 Image(systemName: "wallet.pass.fill")
                                     .font(.system(size: 25))
-                                Text("Adicionar Valor")
+                                Text(carteira.saldo > 0 ? "Carteira" : "Adicionar Valor")
                                     .font(.headline)
                             }
                             .padding()
@@ -56,7 +56,8 @@ struct TelaInicialView: View {
                             .foregroundColor(.white)
                             .cornerRadius(10)
                         }
-                    }.frame(maxWidth: .infinity)
+                    }
+                    .frame(maxWidth: .infinity)
 
                     if !carteira.gastos.isEmpty {
                         NavigationLink(destination: TelaCarteiraView().environmentObject(carteira)) {

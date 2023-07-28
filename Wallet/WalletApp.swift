@@ -6,7 +6,8 @@ struct WalletApp: App {
 
     var body: some Scene {
         WindowGroup {
-            TelaInicialView().environmentObject(carteira)
+            TelaBoasVindasView()
+                .environmentObject(carteira)
         }
     }
 }
