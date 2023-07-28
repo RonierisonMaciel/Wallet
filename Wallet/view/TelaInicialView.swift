@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct TelaInicialView: View {
-    @ObservedObject var carteira: Carteira
+    @EnvironmentObject var carteira: Carteira
 
     var body: some View {
         NavigationView {

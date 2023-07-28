@@ -1,11 +1,16 @@
 import SwiftUI
 
 struct TelaGastosView: View {
-    @EnvironmentObject var carteira: Carteira
+    @EnvironmentObject private var carteira: Carteira
     @State private var activeSheet: ActiveSheet?
     @State private var searchText = ""
+<<<<<<< HEAD
     @State private var gastoSelecionado: Gasto?  // Adicionado
     @State private var gastoSelecionadoIndex: Int?  // Adicionado
+=======
+    @State private var gastoSelecionado: Gasto?
+    @State private var gastoSelecionadoIndex: Int?
+>>>>>>> 2ba26ba (Merge remote-tracking branch 'refs/remotes/origin/main')
 
     var total: Double {
         carteira.gastos.reduce(0) { $0 + $1.valor }
@@ -38,13 +43,17 @@ struct TelaGastosView: View {
                     .cornerRadius(10)
                     .padding(.horizontal)
             }
-                .padding(.top, 20)  // Add some space at the top
+            .padding(.top, 20)
             List {
                 ForEach(gastosFiltrados) { gasto in
                     HStack {
                         VStack(alignment: .leading) {
                             Text(gasto.nome)
+<<<<<<< HEAD
                             Text(gasto.tag.joined(separator: ", "))  // Alterado aqui para exibir tags
+=======
+                            Text(gasto.tag.joined(separator: ", "))
+>>>>>>> 2ba26ba (Merge remote-tracking branch 'refs/remotes/origin/main')
                                 .font(.footnote)
                                 .foregroundColor(.gray)
                         }
@@ -86,15 +95,18 @@ struct TelaGastosView: View {
             .fullScreenCover(item: $activeSheet) { item in
                 switch item {
                 case .addExpense:
-                    TelaNovoGastoView(carteira: carteira)
+                    TelaNovoGastoView().environmentObject(carteira)
                 case .editExpense:
+<<<<<<< HEAD
                     if let index = gastoSelecionadoIndex {
                         EditarGastoView(gastoIndex: index, carteira: carteira)
+=======
+                    if let gastoParaEditar = gastoSelecionado {
+                        EditarGastoView(gasto: Binding(get: { gastoParaEditar }, set: { gastoSelecionado = $0 })).environmentObject(carteira)
+>>>>>>> 2ba26ba (Merge remote-tracking branch 'refs/remotes/origin/main')
                     } else {
                         EmptyView()
                     }
-                default:
-                    EmptyView()
                 }
             }
         }

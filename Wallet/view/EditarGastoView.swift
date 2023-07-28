@@ -2,7 +2,7 @@ import SwiftUI
 
 struct EditarGastoView: View {
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var carteira: Carteira
+    @EnvironmentObject var carteira: Carteira
     @Binding var gasto: Gasto
     @State var nome: String
     @State var valor: String
@@ -36,9 +36,12 @@ struct EditarGastoView: View {
                 let valorDiferenca = novoValor - gasto.valor
                 carteira.saldo -= valorDiferenca  // Subtract the amount difference from the wallet
 
-                // Replace the current instance of ExpenseItem with a new one
-                gasto = Gasto(id: gasto.id, nome: nome, valor: novoValor, data: data, tag: tags)
-                
+                // Update the properties of gasto directly
+                gasto.nome = nome
+                gasto.valor = novoValor
+                gasto.data = data
+                gasto.tag = tags
+
                 // Dismiss the view
                 presentationMode.wrappedValue.dismiss()
             })
