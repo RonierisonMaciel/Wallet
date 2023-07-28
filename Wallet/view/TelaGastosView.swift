@@ -4,6 +4,8 @@ struct TelaGastosView: View {
     @EnvironmentObject var carteira: Carteira
     @State private var activeSheet: ActiveSheet?
     @State private var searchText = ""
+    @State private var gastoSelecionado: Gasto?  // Adicionado
+    @State private var gastoSelecionadoIndex: Int?  // Adicionado
 
     var total: Double {
         carteira.gastos.reduce(0) { $0 + $1.valor }
@@ -42,14 +44,14 @@ struct TelaGastosView: View {
                     HStack {
                         VStack(alignment: .leading) {
                             Text(gasto.nome)
-                            Text(gasto.tag)
+                            Text(gasto.tag.joined(separator: ", "))  // Alterado aqui para exibir tags
                                 .font(.footnote)
                                 .foregroundColor(.gray)
                         }
                         .onTapGesture {
-                            if let index = carteira.gastos.firstIndex(where: { $0.id == gasto.id }) {
-                                activeSheet = .editExpense
-                            }
+                            self.gastoSelecionado = gasto
+                            self.gastoSelecionadoIndex = carteira.gastos.firstIndex(where: { $0.id == gasto.id })
+                            activeSheet = .editExpense
                         }
                         Spacer()
                         Text("R$ \(gasto.valor, specifier: "%.2f")")
@@ -86,8 +88,10 @@ struct TelaGastosView: View {
                 case .addExpense:
                     TelaNovoGastoView(carteira: carteira)
                 case .editExpense:
-                    if let index = carteira.gastos.firstIndex(where: { $0.id == gasto.id }) {
-                        EditarGastoView(gasto: $carteira.gastos[index])
+                    if let index = gastoSelecionadoIndex {
+                        EditarGastoView(gastoIndex: index, carteira: carteira)
+                    } else {
+                        EmptyView()
                     }
                 default:
                     EmptyView()
