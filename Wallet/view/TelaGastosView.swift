@@ -2,7 +2,8 @@ import SwiftUI
 
 struct TelaGastosView: View {
     @EnvironmentObject private var carteira: Carteira
-    @State private var activeSheet: ActiveSheet?
+    @State private var isSheetPresented = false
+    @State private var isEditingExpense = false
     @State private var searchText = ""
 <<<<<<< HEAD
     @State private var gastoSelecionado: Gasto?  // Adicionado
@@ -58,9 +59,11 @@ struct TelaGastosView: View {
                                 .foregroundColor(.gray)
                         }
                         .onTapGesture {
+                            print("Tocou no gasto")  // Ponto de depuração
                             self.gastoSelecionado = gasto
                             self.gastoSelecionadoIndex = carteira.gastos.firstIndex(where: { $0.id == gasto.id })
-                            activeSheet = .editExpense
+                            self.isEditingExpense = true
+                            self.isSheetPresented = true
                         }
                         Spacer()
                         Text("R$ \(gasto.valor, specifier: "%.2f")")
@@ -88,10 +91,12 @@ struct TelaGastosView: View {
             }
             .navigationTitle("Gastos")
             .navigationBarItems(trailing: Button(action: {
-                activeSheet = .addExpense
+                self.isEditingExpense = false
+                self.isSheetPresented = true
             }) {
                 Image(systemName: "plus")
             })
+<<<<<<< HEAD
             .fullScreenCover(item: $activeSheet) { item in
                 switch item {
                 case .addExpense:
@@ -107,6 +112,13 @@ struct TelaGastosView: View {
                     } else {
                         EmptyView()
                     }
+=======
+            .fullScreenCover(isPresented: $isSheetPresented) {
+                if self.isEditingExpense, let gastoParaEditar = self.gastoSelecionado, let gastoIndex = self.gastoSelecionadoIndex {
+                    EditarGastoView(gastoParaEditar: gastoParaEditar, index: gastoIndex).environmentObject(self.carteira)
+                } else {
+                    TelaNovoGastoView().environmentObject(self.carteira)
+>>>>>>> 4b8427c (Merge remote-tracking branch 'refs/remotes/origin/main')
                 }
             }
         }
