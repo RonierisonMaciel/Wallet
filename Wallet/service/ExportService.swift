@@ -1,7 +1,20 @@
 import Foundation
 
 class ExportService {
-    func exportGastosAsCSV(gastos: [Gasto]) -> URL? {
+    enum ExportFormat {
+        case csv, json
+    }
+    
+    func exportGastos(gastos: [Gasto], format: ExportFormat) -> URL? {
+        switch format {
+        case .csv:
+            return exportGastosAsCSV(gastos: gastos)
+        case .json:
+            return exportGastosAsJSON(gastos: gastos)
+        }
+    }
+    
+    private func exportGastosAsCSV(gastos: [Gasto]) -> URL? {
         let fileName = "gastos.csv"
         guard let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             return nil
@@ -23,5 +36,25 @@ class ExportService {
 
         return fileURL
     }
+    
+    private func exportGastosAsJSON(gastos: [Gasto]) -> URL? {
+        let fileName = "gastos.json"
+        guard let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            return nil
+        }
+        let fileURL = path.appendingPathComponent(fileName)
+        
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        
+        do {
+            let jsonData = try encoder.encode(gastos)
+            try jsonData.write(to: fileURL)
+        } catch {
+            print("Falha ao exportar para JSON: \(error)")
+            return nil
+        }
+        
+        return fileURL
+    }
 }
-

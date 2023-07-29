@@ -28,6 +28,8 @@
 		E64B08DC2A74A48F00C2786B /* UIWindowSceneKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08DB2A74A48F00C2786B /* UIWindowSceneKey.swift */; };
 		E64B08DE2A7539BC00C2786B /* InfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08DD2A7539BC00C2786B /* InfoCardView.swift */; };
 		E64B08E22A753C3D00C2786B /* CustomActionButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08E12A753C3D00C2786B /* CustomActionButtonView.swift */; };
+		E64B08E62A7556D800C2786B /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08E52A7556D800C2786B /* ActivityView.swift */; };
+		E64B08EA2A755D4300C2786B /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08E92A755D4300C2786B /* AppState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +55,8 @@
 		E64B08DB2A74A48F00C2786B /* UIWindowSceneKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIWindowSceneKey.swift; path = view/Components/UIWindowSceneKey.swift; sourceTree = "<group>"; };
 		E64B08DD2A7539BC00C2786B /* InfoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InfoCardView.swift; path = view/Components/InfoCardView.swift; sourceTree = "<group>"; };
 		E64B08E12A753C3D00C2786B /* CustomActionButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomActionButtonView.swift; path = view/Components/CustomActionButtonView.swift; sourceTree = "<group>"; };
+		E64B08E52A7556D800C2786B /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ActivityView.swift; path = view/Components/ActivityView.swift; sourceTree = "<group>"; };
+		E64B08E92A755D4300C2786B /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppState.swift; path = view/AppState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,8 @@
 				E64B08DB2A74A48F00C2786B /* UIWindowSceneKey.swift */,
 				E64B08DD2A7539BC00C2786B /* InfoCardView.swift */,
 				E64B08E12A753C3D00C2786B /* CustomActionButtonView.swift */,
+				E64B08E52A7556D800C2786B /* ActivityView.swift */,
+				E64B08E92A755D4300C2786B /* AppState.swift */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -196,10 +202,12 @@
 				E64B08D22A74003900C2786B /* ActiveSheet.swift in Sources */,
 				E64B08C62A734B5600C2786B /* Gasto.swift in Sources */,
 				E64B08C02A734A1B00C2786B /* TelaInicialView.swift in Sources */,
+				E64B08E62A7556D800C2786B /* ActivityView.swift in Sources */,
 				E64B08CC2A73F98800C2786B /* TelaNovoGastoView.swift in Sources */,
 				E64B08CA2A73F7A800C2786B /* EditarGastoView.swift in Sources */,
 				E64B08D02A73FA9E00C2786B /* DecimalField.swift in Sources */,
 				E64B08E22A753C3D00C2786B /* CustomActionButtonView.swift in Sources */,
+				E64B08EA2A755D4300C2786B /* AppState.swift in Sources */,
 				E64B08DC2A74A48F00C2786B /* UIWindowSceneKey.swift in Sources */,
 				E64B08C22A734A4A00C2786B /* TelaGastosView.swift in Sources */,
 				E64B08DA2A74A38800C2786B /* Exportable.swift in Sources */,

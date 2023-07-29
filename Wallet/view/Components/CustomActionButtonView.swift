@@ -2,18 +2,24 @@ import SwiftUI
 import Foundation
 
 struct CustomActionButtonView: View {
-    let action: () -> Void
-    let icon: String
-    let text: String
-    let color: Color
+    var action: () -> Void
+    var icon: String
+    var text: String
+    var color: Color
 
     var body: some View {
-        Button(action: action) {
-            CustomActionButtonView(action: {
-                // Coloque aqui a ação que você quer que aconteça quando o botão é pressionado.
-                print("Botão pressionado!")
-            }, icon: "square.and.arrow.up.fill", text: "Exportar", color: .purple)
-            .padding(.top, 50)
+        Button(action: action) { // aqui é onde você precisa usar a ação que passou
+            HStack {
+                Image(systemName: icon)
+                    .font(.title)
+                    .foregroundColor(.white)
+                Text(text)
+                    .font(.headline)
+                    .foregroundColor(.white)
+            }
+            .frame(width: 220, height: 60)
+            .background(color)
+            .cornerRadius(15)
         }
     }
 }

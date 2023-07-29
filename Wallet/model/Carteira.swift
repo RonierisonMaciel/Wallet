@@ -13,6 +13,7 @@ class Carteira: ObservableObject {
     init() {
         self.gastos = []
         loadData()
+        print("Carteira inicializada com sucesso")
     }
     
     func adicionarValor(valor: Double) {

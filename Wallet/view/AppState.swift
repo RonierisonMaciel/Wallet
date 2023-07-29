@@ -1,20 +1,28 @@
-//
-//  AppState.swift
-//  Wallet
-//
-//  Created by Ronierison Maciel on 29/07/23.
-//
-
 import SwiftUI
 
-struct AppState: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+class AppState: ObservableObject {
+    enum Screen {
+        case boasVindas
+        case inicial
     }
+    
+    @Published var currentScreen: Screen = .boasVindas
+    
 }
 
-struct AppState_Previews: PreviewProvider {
-    static var previews: some View {
-        AppState()
+struct ContentView: View {
+    @EnvironmentObject var appState: AppState
+    @ObservedObject var carteira = Carteira()  // Crie uma instância de Carteira
+    
+    var body: some View {
+        switch appState.currentScreen {
+        case .boasVindas:
+            TelaBoasVindasView()
+        case .inicial:
+            NavigationView {
+                TelaInicialView()
+                    .environmentObject(carteira)  // Passe a instância de Carteira para TelaInicialView
+            }
+        }
     }
 }
