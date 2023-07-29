@@ -22,6 +22,12 @@
 		E64B08D02A73FA9E00C2786B /* DecimalField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08CF2A73FA9E00C2786B /* DecimalField.swift */; };
 		E64B08D22A74003900C2786B /* ActiveSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08D12A74003900C2786B /* ActiveSheet.swift */; };
 		E64B08D42A747E0600C2786B /* TelaBoasVindasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08D32A747E0600C2786B /* TelaBoasVindasView.swift */; };
+		E64B08D62A74A24D00C2786B /* service in Resources */ = {isa = PBXBuildFile; fileRef = E64B08D52A74A24C00C2786B /* service */; };
+		E64B08D82A74A26700C2786B /* ExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08D72A74A26700C2786B /* ExportService.swift */; };
+		E64B08DA2A74A38800C2786B /* Exportable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08D92A74A38800C2786B /* Exportable.swift */; };
+		E64B08DC2A74A48F00C2786B /* UIWindowSceneKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08DB2A74A48F00C2786B /* UIWindowSceneKey.swift */; };
+		E64B08DE2A7539BC00C2786B /* InfoCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08DD2A7539BC00C2786B /* InfoCardView.swift */; };
+		E64B08E22A753C3D00C2786B /* CustomActionButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E64B08E12A753C3D00C2786B /* CustomActionButtonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +47,12 @@
 		E64B08CF2A73FA9E00C2786B /* DecimalField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DecimalField.swift; path = view/Components/DecimalField.swift; sourceTree = "<group>"; };
 		E64B08D12A74003900C2786B /* ActiveSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ActiveSheet.swift; path = view/Components/ActiveSheet.swift; sourceTree = "<group>"; };
 		E64B08D32A747E0600C2786B /* TelaBoasVindasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TelaBoasVindasView.swift; path = view/TelaBoasVindasView.swift; sourceTree = "<group>"; };
+		E64B08D52A74A24C00C2786B /* service */ = {isa = PBXFileReference; lastKnownFileType = folder; path = service; sourceTree = "<group>"; };
+		E64B08D72A74A26700C2786B /* ExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExportService.swift; path = service/ExportService.swift; sourceTree = "<group>"; };
+		E64B08D92A74A38800C2786B /* Exportable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Exportable.swift; path = view/Components/Exportable.swift; sourceTree = "<group>"; };
+		E64B08DB2A74A48F00C2786B /* UIWindowSceneKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIWindowSceneKey.swift; path = view/Components/UIWindowSceneKey.swift; sourceTree = "<group>"; };
+		E64B08DD2A7539BC00C2786B /* InfoCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InfoCardView.swift; path = view/Components/InfoCardView.swift; sourceTree = "<group>"; };
+		E64B08E12A753C3D00C2786B /* CustomActionButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomActionButtonView.swift; path = view/Components/CustomActionButtonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +85,7 @@
 		E64B08922A73138200C2786B /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				E64B08D52A74A24C00C2786B /* service */,
 				E64B08932A73138200C2786B /* WalletApp.swift */,
 				E64B08B52A73489E00C2786B /* view */,
 				E64B08B32A73489500C2786B /* model */,
@@ -88,6 +101,11 @@
 				E64B08CF2A73FA9E00C2786B /* DecimalField.swift */,
 				E64B08D12A74003900C2786B /* ActiveSheet.swift */,
 				E64B08D32A747E0600C2786B /* TelaBoasVindasView.swift */,
+				E64B08D72A74A26700C2786B /* ExportService.swift */,
+				E64B08D92A74A38800C2786B /* Exportable.swift */,
+				E64B08DB2A74A48F00C2786B /* UIWindowSceneKey.swift */,
+				E64B08DD2A7539BC00C2786B /* InfoCardView.swift */,
+				E64B08E12A753C3D00C2786B /* CustomActionButtonView.swift */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -159,6 +177,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E64B08B42A73489500C2786B /* model in Resources */,
+				E64B08D62A74A24D00C2786B /* service in Resources */,
 				E64B089B2A73138400C2786B /* Preview Assets.xcassets in Resources */,
 				E64B08982A73138400C2786B /* Assets.xcassets in Resources */,
 				E64B08B62A73489E00C2786B /* view in Resources */,
@@ -180,8 +199,13 @@
 				E64B08CC2A73F98800C2786B /* TelaNovoGastoView.swift in Sources */,
 				E64B08CA2A73F7A800C2786B /* EditarGastoView.swift in Sources */,
 				E64B08D02A73FA9E00C2786B /* DecimalField.swift in Sources */,
+				E64B08E22A753C3D00C2786B /* CustomActionButtonView.swift in Sources */,
+				E64B08DC2A74A48F00C2786B /* UIWindowSceneKey.swift in Sources */,
 				E64B08C22A734A4A00C2786B /* TelaGastosView.swift in Sources */,
+				E64B08DA2A74A38800C2786B /* Exportable.swift in Sources */,
+				E64B08D82A74A26700C2786B /* ExportService.swift in Sources */,
 				E64B08942A73138200C2786B /* WalletApp.swift in Sources */,
+				E64B08DE2A7539BC00C2786B /* InfoCardView.swift in Sources */,
 				E64B08C42A734A7400C2786B /* TelaCarteiraView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

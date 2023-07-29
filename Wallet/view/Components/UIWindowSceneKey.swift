@@ -1,8 +1,12 @@
-//
-//  UIWindowSceneKey.swift
-//  Wallet
-//
-//  Created by Ronierison Maciel on 28/07/23.
-//
+import SwiftUI
 
-import Foundation
+struct UIWindowSceneKey: EnvironmentKey {
+    static var defaultValue: UIWindowScene? = nil
+}
+
+extension EnvironmentValues {
+    var windowScene: UIWindowScene? {
+        get { self[UIWindowSceneKey.self] }
+        set { self[UIWindowSceneKey.self] = newValue }
+    }
+}

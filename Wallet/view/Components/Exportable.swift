@@ -1,8 +1,6 @@
-//
-//  Exportable.swift
-//  Wallet
-//
-//  Created by Ronierison Maciel on 28/07/23.
-//
-
 import Foundation
+
+protocol Exportable {
+    func exportAsCSV() -> String
+    func exportAsTXT() -> String
+}

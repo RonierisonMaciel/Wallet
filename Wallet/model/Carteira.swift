@@ -1,11 +1,8 @@
 import Foundation
+import SwiftUI
 
 class Carteira: ObservableObject {
-    @Published var saldo: Double {
-        didSet {
-            saveData()
-        }
-    }
+    @AppStorage("saldo") var saldo: Double = 0.0
     
     @Published var gastos: [Gasto] {
         didSet {
@@ -13,9 +10,8 @@ class Carteira: ObservableObject {
         }
     }
     
-    init(saldo: Double, gastos: [Gasto]) {
-        self.saldo = saldo
-        self.gastos = gastos
+    init() {
+        self.gastos = []
         loadData()
     }
     
@@ -24,12 +20,10 @@ class Carteira: ObservableObject {
     }
     
     func adicionarGasto(gasto: Gasto) {
-        // Verifica se o saldo é suficiente antes de adicionar o gasto
         if saldo >= gasto.valor {
             gastos.append(gasto)
             saldo -= gasto.valor
         } else {
-            // Ação ou mensagem de erro para saldo insuficiente
             print("Saldo insuficiente para este gasto.")
         }
     }
@@ -47,7 +41,6 @@ class Carteira: ObservableObject {
         let encoder = JSONEncoder()
         if let data = try? encoder.encode(gastos) {
             UserDefaults.standard.set(data, forKey: "gastos")
-            UserDefaults.standard.set(saldo, forKey: "saldo")
         }
     }
     
@@ -57,6 +50,5 @@ class Carteira: ObservableObject {
            let decodedGastos = try? decoder.decode([Gasto].self, from: data) {
             self.gastos = decodedGastos
         }
-        self.saldo = UserDefaults.standard.double(forKey: "saldo")
     }
 }

@@ -47,75 +47,83 @@ struct TelaGastosView: View {
     }()
 
     var body: some View {
-        VStack {
-            HStack {
-                Image(systemName: "magnifyingglass")
-                    .foregroundColor(.gray)
-                    .padding(.leading)
-                TextField("Buscar", text: $searchText)
-                    .padding(10)
-                    .background(Color(.systemGray6))
-                    .cornerRadius(10)
-                    .padding(.horizontal)
-            }
-            .padding(.top, 20)
-            List {
-                ForEach(mesesOrdenados, id: \.self) { mes in
-                    Section(header: Text(monthYearFormatter.string(from: mes))) {
-                        ForEach(gastosPorMes[mes]!, id: \.id) { gasto in
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    Text(gasto.nome)
-                                    Text(gasto.tag.joined(separator: ", "))
-                                        .font(.footnote)
-                                        .foregroundColor(.gray)
+        ZStack {
+            Color(.systemGray6)
+                .ignoresSafeArea()
+
+            VStack {
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(.gray)
+                    TextField("Buscar", text: $searchText)
+                        .font(.system(size: 18))
+                        .padding(12)
+                        .background(Color.white)
+                        .cornerRadius(15)
+                        .padding(.horizontal)
+                }
+                .padding(.top, 20)
+
+                List {
+                    ForEach(mesesOrdenados, id: \.self) { mes in
+                        Section(header: Text(monthYearFormatter.string(from: mes)).font(.system(size: 20))) {
+                            ForEach(gastosPorMes[mes]!, id: \.id) { gasto in
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        Text(gasto.nome)
+                                        Text(gasto.tag.joined(separator: ", "))
+                                            .font(.footnote)
+                                            .foregroundColor(.gray)
+                                    }
+                                    .onTapGesture {
+                                        self.gastoSelecionado = gasto
+                                        self.gastoSelecionadoIndex = carteira.gastos.firstIndex(where: { $0.id == gasto.id })
+                                        self.isEditingExpense = true
+                                        self.isSheetPresented = true
+                                    }
+                                    Spacer()
+                                    Text("R$ \(gasto.valor, specifier: "%.2f")")
                                 }
-                                .onTapGesture {
-                                    self.gastoSelecionado = gasto
-                                    self.gastoSelecionadoIndex = carteira.gastos.firstIndex(where: { $0.id == gasto.id })
-                                    self.isEditingExpense = true
-                                    self.isSheetPresented = true
-                                }
-                                Spacer()
-                                Text("R$ \(gasto.valor, specifier: "%.2f")")
                             }
+                            .onDelete(perform: { indexSet in
+                                delete(at: indexSet, from: mes)
+                            })
                         }
-                        .onDelete(perform: { indexSet in
-                            delete(at: indexSet, from: mes)
-                        })
+                    }
+
+                    HStack {
+                        Text("Total")
+                            .font(.headline)
+                        Spacer()
+                        Text("R$ \(total, specifier: "%.2f")")
+                            .font(.headline)
+                    }
+
+                    HStack {
+                        Text("Saldo Atual")
+                            .font(.headline)
+                        Spacer()
+                        Text("R$ \(saldoAtual, specifier: "%.2f")")
+                            .font(.headline)
                     }
                 }
-
-                HStack {
-                    Text("Total")
-                        .font(.headline)
-                    Spacer()
-                    Text("R$ \(total, specifier: "%.2f")")
-                        .font(.headline)
-                }
-
-                HStack {
-                    Text("Saldo Atual")
-                        .font(.headline)
-                    Spacer()
-                    Text("R$ \(saldoAtual, specifier: "%.2f")")
-                        .font(.headline)
-                }
-            }
-            .navigationTitle("Gastos")
-            .navigationBarItems(trailing: Button(action: {
-                self.isEditingExpense = false
-                self.isSheetPresented = true
-            }) {
-                Image(systemName: "plus")
-            })
-            .fullScreenCover(isPresented: $isSheetPresented) {
-                if self.isEditingExpense, let gastoParaEditar = self.gastoSelecionado, let gastoIndex = self.gastoSelecionadoIndex {
-                    EditarGastoView(gastoParaEditar: gastoParaEditar, index: gastoIndex).environmentObject(self.carteira)
-                } else {
-                    TelaNovoGastoView().environmentObject(self.carteira)
+                .listStyle(GroupedListStyle())
+                .navigationTitle("Gastos")
+                .navigationBarItems(trailing: Button(action: {
+                    self.isEditingExpense = false
+                    self.isSheetPresented = true
+                }) {
+                    Image(systemName: "plus")
+                })
+                .fullScreenCover(isPresented: $isSheetPresented) {
+                    if self.isEditingExpense, let gastoParaEditar = self.gastoSelecionado, let gastoIndex = self.gastoSelecionadoIndex {
+                        EditarGastoView(gastoParaEditar: gastoParaEditar, index: gastoIndex).environmentObject(self.carteira)
+                    } else {
+                        TelaNovoGastoView().environmentObject(self.carteira)
+                    }
                 }
             }
+            .background(Color(.systemGray6))
         }
     }
 

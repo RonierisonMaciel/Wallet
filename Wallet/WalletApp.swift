@@ -2,12 +2,13 @@ import SwiftUI
 
 @main
 struct WalletApp: App {
-    @StateObject var carteira = Carteira(saldo: 0.0, gastos: [])
+    @StateObject private var carteira = Carteira()
 
     var body: some Scene {
         WindowGroup {
             TelaBoasVindasView()
                 .environmentObject(carteira)
+                .environment(\.windowScene, UIApplication.shared.connectedScenes.first as? UIWindowScene)
         }
     }
 }
