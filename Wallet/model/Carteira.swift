@@ -3,20 +3,24 @@ import SwiftUI
 
 class Carteira: ObservableObject {
     @AppStorage("saldo") var saldo: Double = 0.0
-    
+    private var saldoOriginal: Double?
     @Published var gastos: [Gasto] {
         didSet {
             saveData()
         }
     }
-    
+
     init() {
         self.gastos = []
         loadData()
+        saldoOriginal = saldo
         print("Carteira inicializada com sucesso")
     }
     
     func adicionarValor(valor: Double) {
+        if saldoOriginal == nil {
+            saldoOriginal = valor
+        }
         saldo += valor
     }
     
@@ -31,10 +35,14 @@ class Carteira: ObservableObject {
     
     func limparGastos() {
         gastos.removeAll()
+        if let saldoInicial = saldoOriginal {
+            saldo = saldoInicial
+        }
     }
     
     func limparCarteira() {
         saldo = 0.0
+        saldoOriginal = nil
         gastos.removeAll()
     }
     

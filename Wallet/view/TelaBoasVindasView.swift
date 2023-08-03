@@ -24,8 +24,6 @@ struct TelaBoasVindasView: View {
 
                     Button(action: {
                         self.appState.currentScreen = .inicial
-                        print("Botão Começar pressionado")
-                        print("Mostrando Tela Inicial")
                     }) {
                         Text("Começar")
                             .font(.headline)

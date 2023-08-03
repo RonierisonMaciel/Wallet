@@ -11,19 +11,20 @@ struct DecimalField: View {
         TextField(placeholder, text: $valueStr)
             .keyboardType(.decimalPad)
             .onReceive(Just(valueStr)) { newValue in
-                let filtered = newValue.filter { "0123456789.".contains($0) }
+                let filtered = newValue.filter { "0123456789.,".contains($0) }
                 if filtered != newValue {
                     self.valueStr = filtered
                 }
             }
             .onChange(of: valueStr) { value in
-                self.value = Double(value)
+                let valueWithPoint = value.replacingOccurrences(of: ",", with: ".")
+                self.value = Double(valueWithPoint)
             }
     }
 
     init(_ placeholder: String, value: Binding<Double?>) {
         self.placeholder = placeholder
         _value = value
-        self._valueStr = State(initialValue: value.wrappedValue != nil ? String(format: "%.2f", value.wrappedValue!) : "")
+        self._valueStr = State(initialValue: value.wrappedValue != nil ? String(value.wrappedValue!) : "")
     }
 }

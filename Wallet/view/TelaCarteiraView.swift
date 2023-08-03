@@ -30,7 +30,6 @@ struct TelaCarteiraView: View {
                     CustomActionButtonView(action: {
                         if carteira.saldo > 0 {
                             self.showingModal = true
-                            print("Modal aberto") // Adicionado print
                         } else {
                             if let valor = Double(valorEntrada) {
                                 carteira.saldo += valor
@@ -69,7 +68,6 @@ struct TelaCarteiraView: View {
 
                     CustomActionButtonView(action: {
                         self.showingActionSheet = true
-                        print("ActionSheet aberto") // Adicionado print
                     }, icon: "ellipsis.circle.fill", text: "Opções", color: .orange)
                     .actionSheet(isPresented: $showingActionSheet) {
                         ActionSheet(title: Text("Opções"), buttons: [
