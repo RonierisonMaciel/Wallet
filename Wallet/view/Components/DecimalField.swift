@@ -24,6 +24,6 @@ struct DecimalField: View {
     init(_ placeholder: String, value: Binding<Double?>) {
         self.placeholder = placeholder
         _value = value
-        self._valueStr = State(initialValue: value.wrappedValue != nil ? String(value.wrappedValue!) : "")
+        self._valueStr = State(initialValue: value.wrappedValue != nil ? String(format: "%.2f", value.wrappedValue!) : "")
     }
 }

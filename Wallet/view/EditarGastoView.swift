@@ -5,7 +5,7 @@ struct EditarGastoView: View {
     @EnvironmentObject var carteira: Carteira
 
     @State private var nome: String
-    @State private var valor: String
+    @State private var valor: Double?
     @State private var tags = [String]()
     @State private var data: Date
     var index: Int
@@ -14,7 +14,7 @@ struct EditarGastoView: View {
         NavigationView {
             Form {
                 TextField("Nome", text: $nome)
-                TextField("Valor", text: $valor)
+                DecimalField("Valor", value: $valor)
                 DatePicker("Data", selection: $data, displayedComponents: .date)
                 TextField("Tags (separadas por vírgulas)", text: Binding(
                     get: { self.tags.joined(separator: ", ") },
@@ -32,7 +32,7 @@ struct EditarGastoView: View {
     
     init(gastoParaEditar: Gasto, index: Int) {
         _nome = State(initialValue: gastoParaEditar.nome)
-        _valor = State(initialValue: String(format: "%.2f", gastoParaEditar.valor))
+        _valor = State(initialValue: gastoParaEditar.valor)
         _tags = State(initialValue: gastoParaEditar.tag)
         _data = State(initialValue: gastoParaEditar.data)
         self.index = index
@@ -40,13 +40,13 @@ struct EditarGastoView: View {
     
     func loadData() {
         nome = carteira.gastos[index].nome
-        valor = String(format: "%.2f", carteira.gastos[index].valor)
+        valor = carteira.gastos[index].valor
         tags = carteira.gastos[index].tag
         data = carteira.gastos[index].data
     }
 
     func updateData() {
-        let novoValor = Double(valor.replacingOccurrences(of: ",", with: ".")) ?? 0.0
+        let novoValor = valor ?? 0.0
         let valorDiferenca = novoValor - carteira.gastos[index].valor
         carteira.saldo -= valorDiferenca
 
