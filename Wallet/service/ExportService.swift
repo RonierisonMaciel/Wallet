@@ -44,8 +44,12 @@ class ExportService {
         }
         let fileURL = path.appendingPathComponent(fileName)
         
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        
         let encoder = JSONEncoder()
         encoder.outputFormatting = .prettyPrinted
+        encoder.dateEncodingStrategy = .formatted(formatter)
         
         do {
             let jsonData = try encoder.encode(gastos)
