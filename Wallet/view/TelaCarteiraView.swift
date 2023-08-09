@@ -72,12 +72,12 @@ struct TelaCarteiraView: View {
                     .actionSheet(isPresented: $showingActionSheet) {
                         ActionSheet(title: Text("Opções"), buttons: [
                             .destructive(Text("Limpar Gastos"), action: {
-                                self.carteira.gastos.removeAll()
+                                self.carteira.limparGastos()
                                 print("Gastos removidos") // Adicionado print
                             }),
                             .destructive(Text("Limpar Carteira"), action: {
                                 self.carteira.saldo = 0.0
-                                self.carteira.gastos.removeAll()
+                                self.carteira.limparCarteira()
                                 print("Carteira limpa") // Adicionado print
                             }),
                             .cancel()
