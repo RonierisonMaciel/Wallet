@@ -1,10 +1,10 @@
-# Carteira de Bolso
+# Wallet
 
 Um aplicativo de controle financeiro pessoal para iOS, desenvolvido com SwiftUI.
 
 ## Descrição
 
-O "Carteira de Bolso" é um aplicativo de controle financeiro que permite ao usuário gerenciar seus gastos e saldo de maneira eficiente. Com uma interface amigável e intuitiva, o usuário pode adicionar, editar e visualizar gastos, além de exportar esses dados em diferentes formatos.
+O "Wallet" é um aplicativo de controle financeiro que permite ao usuário gerenciar seus gastos e saldo de maneira eficiente. Com uma interface amigável e intuitiva, o usuário pode adicionar, editar e visualizar gastos, além de exportar esses dados em diferentes formatos.
 
 ## Funcionalidades
 
