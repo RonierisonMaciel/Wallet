@@ -1,48 +1,57 @@
 # Wallet
 
-Um aplicativo de controle financeiro pessoal para iOS, desenvolvido com SwiftUI.
+Uma aplicação iOS simples para gerenciar seus gastos diários.
 
 ## Descrição
 
-O "Wallet" é um aplicativo de controle financeiro que permite ao usuário gerenciar seus gastos e saldo de maneira eficiente. Com uma interface amigável e intuitiva, o usuário pode adicionar, editar e visualizar gastos, além de exportar esses dados em diferentes formatos.
+O "Wallet" permite que você monitore seus gastos e mantenha um registro de suas transações diárias. Com uma interface amigável, você pode facilmente adicionar, editar ou remover gastos, bem como visualizar seu saldo atual.
 
-## Funcionalidades
+## Screenshots
 
-- **Adicionar Gastos**: Registre seus gastos diários com detalhes como nome, valor, data e tags.
-  
-- **Editar Gastos**: Modifique gastos já registrados conforme necessário.
-  
-- **Visualizar Gastos**: Veja todos os seus gastos organizados por mês, com a possibilidade de filtrá-los por nome ou tag.
-  
-- **Gerenciar Saldo**: Adicione valores ao seu saldo e veja o saldo atualizado em tempo real.
-  
-- **Exportar Dados**: Exporte seus gastos em formatos como CSV e JSON.
-  
-- **Interface Amigável**: Navegue facilmente pelo aplicativo com uma interface limpa e intuitiva.
+**Tela Principal:**
+![Tela Principal](img/1.png)
 
-## Instalação
+**Adicionar Gasto:**
+![Adicionar Gasto](img/2.png)
 
-Para instalar e rodar o projeto, siga os passos abaixo:
+**Editar Gasto:**
+![Editar Gasto](img/3.png)
 
-1. Clone o repositório para sua máquina local.
-2. Abra o projeto no Xcode.
-3. Selecione o dispositivo ou emulador desejado.
-4. Clique no botão "Run" ou pressione `Cmd + R`.
+**Exportar:**
+![Exportar](img/4.png)
 
-## Dependências
+**Opções:**
+![Opções](img/5.png)
 
-- **SwiftUI**: Framework de interface do usuário usado para criar a interface do aplicativo.
-  
-- **Foundation**: Framework usado para manipulação de dados e outras operações básicas.
+## Características
 
-## Contribuição
+- Adicione gastos com nome, valor, data e tags.
+- Edite ou remova gastos conforme necessário.
+- Visualize um resumo dos seus gastos mensais.
+- Interface intuitiva e fácil de usar.
 
-Contribuições são bem-vindas! Se você encontrou um bug ou tem uma sugestão de recurso, sinta-se à vontade para abrir uma issue ou pull request.
+## Como Usar
+
+1. Na tela principal, você verá seu saldo atual.
+2. Use o botão "+" para adicionar um novo gasto.
+3. Deslize para a esquerda em um gasto para editar ou remover.
+4. Use a barra de pesquisa para filtrar gastos por nome ou tag.
+
+## Requisitos
+
+- iOS 15.0 ou superior
+- Xcode 13.0 ou superior
+
+## Futuras Atualizações
+
+- [ ] Sincronização com a nuvem.
+- [ ] Categorias para gastos.
+- [ ] Gráficos e análises de gastos.
+
+## Contribuições
+
+Contribuições são bem-vindas! Por favor, leia o arquivo CONTRIBUTING.md para detalhes.
 
 ## Licença
 
-Este projeto está licenciado sob a licença MIT.
-
-## Contato
-
-Se você tiver alguma dúvida ou feedback, entre em contato!
+Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE.md](LICENSE.md) para detalhes.
