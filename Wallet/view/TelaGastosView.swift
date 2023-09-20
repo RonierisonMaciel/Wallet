@@ -86,7 +86,7 @@ struct TelaGastosView: View {
                                 }
                             }
                             .onDelete(perform: { indexSet in
-                                delete(at: indexSet, from: mes)
+                                delete(at: indexSet)
                             })
                         }
                     }
@@ -127,12 +127,7 @@ struct TelaGastosView: View {
         }
     }
 
-    func delete(at offsets: IndexSet, from month: Date) {
-        offsets.forEach { offset in
-            if let index = carteira.gastos.firstIndex(where: { $0.id == gastosPorMes[month]![offset].id }) {
-                carteira.saldo = carteira.saldo + carteira.gastos[index].valor
-                carteira.gastos.remove(at: index)
-            }
-        }
+    func delete(at offsets: IndexSet) {
+        carteira.removerGasto(at: offsets)
     }
 }
