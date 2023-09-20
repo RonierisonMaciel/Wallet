@@ -5,6 +5,7 @@ struct TelaCarteiraView: View {
     @State private var valorEntrada: String = ""
     @State private var showingActionSheet = false
     @State private var showingModal = false
+    @State private var showError = false
 
     var body: some View {
         NavigationView {
@@ -28,16 +29,10 @@ struct TelaCarteiraView: View {
                     }
 
                     CustomActionButtonView(action: {
-                        if carteira.saldo > 0 {
-                            self.showingModal = true
-                        } else {
-                            if let valor = Double(valorEntrada) {
-                                carteira.saldo += valor
-                                print("Valor adicionado ao saldo: \(valor)") // Adicionado print
-                            } else {
-                                print("Não foi possível converter '\(valorEntrada)' para Double") // Adicionado print
-                            }
-                            valorEntrada = ""
+                        do {
+                            try adicionarValor()
+                        } catch {
+                            showError = true
                         }
                     }, icon: "plus.circle.fill", text: "Adicionar Valor", color: .blue)
                     .padding(.top, 50)
@@ -53,14 +48,12 @@ struct TelaCarteiraView: View {
                                 .cornerRadius(10)
                                 .foregroundColor(.black)
                             CustomActionButtonView(action: {
-                                if let valor = Double(self.valorEntrada) {
-                                    self.carteira.saldo += valor
-                                    print("Valor adicionado ao saldo: \(valor)") // Adicionado print
-                                } else {
-                                    print("Não foi possível converter '\(valorEntrada)' para Double") // Adicionado print
+                                do {
+                                    try adicionarValor()
+                                    showingModal = false
+                                } catch {
+                                    showError = true
                                 }
-                                self.valorEntrada = ""
-                                self.showingModal = false
                             }, icon: "plus.circle.fill", text: "Acrescentar", color: .blue)
                         }
                         .padding()
@@ -73,12 +66,9 @@ struct TelaCarteiraView: View {
                         ActionSheet(title: Text("Opções"), buttons: [
                             .destructive(Text("Limpar Gastos"), action: {
                                 self.carteira.limparGastos()
-                                print("Gastos removidos") // Adicionado print
                             }),
                             .destructive(Text("Limpar Carteira"), action: {
-                                self.carteira.saldo = 0.0
                                 self.carteira.limparCarteira()
-                                print("Carteira limpa") // Adicionado print
                             }),
                             .cancel()
                         ])
@@ -86,7 +76,18 @@ struct TelaCarteiraView: View {
                 }
                 .padding()
                 .navigationBarTitle(Text("Carteira"), displayMode: .inline)
+                .alert(isPresented: $showError) {
+                    Alert(title: Text("Erro"), message: Text("Valor inválido. Por favor, insira um valor válido."), dismissButton: .default(Text("Entendi")))
+                }
             }
         }
+    }
+
+    func adicionarValor() throws {
+        guard let valor = Double(valorEntrada) else {
+            throw CarteiraError.saldoInsuficiente
+        }
+        carteira.adicionarValor(valor: valor)
+        valorEntrada = ""
     }
 }
