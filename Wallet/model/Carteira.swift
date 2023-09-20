@@ -1,11 +1,17 @@
 import Foundation
 import SwiftUI
 
+enum CarteiraError: Error {
+    case saldoInsuficiente
+}
+
 class Carteira: ObservableObject {
-    @AppStorage("saldo") var saldo: Double = 0.0
-    @AppStorage("saldoOriginal") var saldoOriginal: Double = 0.0
-    var gastosTotais: Double = 0.0
-    @Published var gastos: [Gasto] {
+    @AppStorage("saldo") private(set) var saldo: Double = 0.0
+    @AppStorage("saldoOriginal") private(set) var saldoOriginal: Double = 0.0
+    private(set) var gastosTotais: Double = 0.0
+    @Published var showError: Bool = false
+    @Published var errorMessage: String = ""
+    @Published private(set) var gastos: [Gasto] {
         didSet {
             saveData()
         }
@@ -14,7 +20,6 @@ class Carteira: ObservableObject {
     init() {
         self.gastos = []
         loadData()
-        print("Carteira inicializada com sucesso")
     }
     
     func adicionarValor(valor: Double) {
@@ -22,13 +27,13 @@ class Carteira: ObservableObject {
         saldoOriginal += valor
     }
     
-    func adicionarGasto(gasto: Gasto) {
+    func adicionarGasto(gasto: Gasto) throws {
         if saldo >= gasto.valor {
             gastos.append(gasto)
             saldo -= gasto.valor
             gastosTotais += gasto.valor
         } else {
-            print("Saldo insuficiente para este gasto.")
+            throw CarteiraError.saldoInsuficiente
         }
     }
     
@@ -51,38 +56,41 @@ class Carteira: ObservableObject {
     }
     
     func limparGastos() {
-        let totalGastos = gastos.reduce(0) { $0 + $1.valor }
-        
-        if totalGastos > 0 {
-            saldo -= saldoOriginal
-            gastos.removeAll()
-            print("Gastos limpos")
-        } else if totalGastos < saldo {
-                    print("totalGastos < saldo")
-            }
+        saldo = saldoOriginal
+        gastos.removeAll()
     }
-
+    
     func limparCarteira() {
         saldo = 0.0
         saldoOriginal = 0.0
         gastos.removeAll()
         UserDefaults.standard.removeObject(forKey: "saldo")
         UserDefaults.standard.removeObject(forKey: "saldoOriginal")
-        print("Carteira limpa")
     }
     
     private func saveData() {
         let encoder = JSONEncoder()
-        if let data = try? encoder.encode(gastos) {
+        do {
+            let data = try encoder.encode(gastos)
             UserDefaults.standard.set(data, forKey: "gastos")
+        } catch {
+            print("Erro ao salvar gastos: \(error.localizedDescription)")
+            self.errorMessage = "Erro ao salvar gastos. Por favor, tente novamente."
+            self.showError = true
         }
     }
     
     private func loadData() {
         let decoder = JSONDecoder()
-        if let data = UserDefaults.standard.data(forKey: "gastos"),
-           let decodedGastos = try? decoder.decode([Gasto].self, from: data) {
-            self.gastos = decodedGastos
+        if let data = UserDefaults.standard.data(forKey: "gastos") {
+            do {
+                let decodedGastos = try decoder.decode([Gasto].self, from: data)
+                self.gastos = decodedGastos
+            } catch {
+                print("Erro ao carregar gastos: \(error.localizedDescription)")
+                self.errorMessage = "Erro ao carregar gastos. Por favor, tente novamente."
+                self.showError = true
+            }
         }
     }
 }
