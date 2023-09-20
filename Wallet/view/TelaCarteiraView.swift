@@ -19,44 +19,24 @@ struct TelaCarteiraView: View {
                         .foregroundColor(.white)
                         .padding()
 
-                    if carteira.saldo <= 0 {
-                        TextField("Adicionar Valor", text: $valorEntrada)
-                            .keyboardType(.decimalPad)
-                            .padding()
-                            .background(Color.white)
-                            .cornerRadius(10)
-                            .foregroundColor(.black)
-                    }
+                    TextField("Adicionar Valor", text: $valorEntrada)
+                        .keyboardType(.decimalPad)
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(10)
+                        .foregroundColor(.black)
 
                     CustomActionButtonView(action: {
-                        do {
-                            try adicionarValor()
-                        } catch {
+                        if let valor = Double(valorEntrada) {
+                            carteira.adicionarValor(valor: valor)
+                            valorEntrada = ""
+                        } else {
                             showError = true
                         }
                     }, icon: "plus.circle.fill", text: "Adicionar Valor", color: .blue)
                     .padding(.top, 50)
-                    .sheet(isPresented: $showingModal) {
-                        VStack(spacing: 20) {
-                            Text("Acrescentar Valor")
-                                .font(Font.custom("AvenirNext-DemiBold", size: 25))
-                                .foregroundColor(.black)
-                            TextField("Valor", text: $valorEntrada)
-                                .keyboardType(.decimalPad)
-                                .padding()
-                                .background(Color.white)
-                                .cornerRadius(10)
-                                .foregroundColor(.black)
-                            CustomActionButtonView(action: {
-                                do {
-                                    try adicionarValor()
-                                    showingModal = false
-                                } catch {
-                                    showError = true
-                                }
-                            }, icon: "plus.circle.fill", text: "Acrescentar", color: .blue)
-                        }
-                        .padding()
+                    .alert(isPresented: $showError) {
+                        Alert(title: Text("Erro"), message: Text("Valor inválido. Por favor, insira um valor válido."), dismissButton: .default(Text("Entendi")))
                     }
 
                     CustomActionButtonView(action: {
@@ -76,18 +56,7 @@ struct TelaCarteiraView: View {
                 }
                 .padding()
                 .navigationBarTitle(Text("Carteira"), displayMode: .inline)
-                .alert(isPresented: $showError) {
-                    Alert(title: Text("Erro"), message: Text("Valor inválido. Por favor, insira um valor válido."), dismissButton: .default(Text("Entendi")))
-                }
             }
         }
-    }
-
-    func adicionarValor() throws {
-        guard let valor = Double(valorEntrada) else {
-            throw CarteiraError.saldoInsuficiente
-        }
-        carteira.adicionarValor(valor: valor)
-        valorEntrada = ""
     }
 }
