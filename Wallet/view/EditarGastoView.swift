@@ -8,6 +8,8 @@ struct EditarGastoView: View {
     @State private var valor: Double?
     @State private var tags = [String]()
     @State private var data: Date
+    @State private var showError = false
+    @State private var errorMessage: String = ""
     var index: Int
 
     var body: some View {
@@ -25,8 +27,13 @@ struct EditarGastoView: View {
             .navigationTitle("Editar Gasto")
             .navigationBarItems(trailing: Button("Salvar") {
                 updateData()
-                presentationMode.wrappedValue.dismiss()
+                if !showError {
+                    presentationMode.wrappedValue.dismiss()
+                }
             })
+            .alert(isPresented: $showError) {
+                Alert(title: Text("Erro"), message: Text(errorMessage), dismissButton: .default(Text("Entendi")))
+            }
         }
     }
     
@@ -46,13 +53,15 @@ struct EditarGastoView: View {
     }
 
     func updateData() {
-        let novoValor = valor ?? 0.0
-        let valorDiferenca = novoValor - carteira.gastos[index].valor
-        carteira.saldo -= valorDiferenca
-
-        carteira.gastos[index].nome = nome
-        carteira.gastos[index].valor = novoValor
-        carteira.gastos[index].data = data
-        carteira.gastos[index].tag = tags
+        let gastoAtual = carteira.gastos[index]
+        let novoGasto = Gasto(id: gastoAtual.id, nome: nome, valor: valor ?? 0.0, data: data, tag: tags)
+        
+        let diferenca = novoGasto.valor - gastoAtual.valor
+        if carteira.saldo - diferenca >= 0 {
+            carteira.editarGasto(gastoAtual, with: novoGasto)
+        } else {
+            errorMessage = "Saldo insuficiente para editar este gasto."
+            showError = true
+        }
     }
 }
