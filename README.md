@@ -50,8 +50,8 @@ O "Wallet" permite que você monitore seus gastos e mantenha um registro de suas
 
 ## Contribuições
 
-Contribuições são bem-vindas! Por favor, leia o arquivo CONTRIBUTING.md para detalhes.
+Contribuições são bem-vindas! Por favor, leia o arquivo [CONTRIBUTING.md](CONTRIBUTING.md) para detalhes sobre como contribuir para este projeto.
 
 ## Licença
 
-Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE.md](LICENSE.md) para detalhes.
+Este projeto está licenciado sob a licença MIT. Para mais detalhes, consulte o arquivo [LICENSE.md](LICENSE.md).
