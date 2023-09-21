@@ -8,13 +8,13 @@ O "Wallet" permite que você monitore seus gastos e mantenha um registro de suas
 
 ## Screenshots
 
-| ![Tela Principal](img/1.png) | ![Adicionar Gasto](img/2.png) |
+| ![Tela Principal](img/1.png) | ![Tela Inicial](img/2.png)   |
 |:---------------------------:|:-----------------------------:|
-| **Tela Principal**          | **Adicionar Gasto**           |
-| ![Editar Gasto](img/3.png)  | ![Exportar](img/4.png)       |
-| **Editar Gasto**            | **Exportar**                  |
-| ![Opções](img/5.png)        |                              |
-| **Opções**                  |                              |
+| **Tela Principal**          | **Tela Inicial**              |
+| ![Adicionar Gasto](img/3.png)| ![Editar Gasto](img/4.png)   |
+| **Adicionar Gasto**         | **Editar Gasto**              |
+| ![Exportar](img/5.png)      | ![Opções](img/6.png)          |
+| **Exportar**                | **Opções**                    |
 
 ## Características
 
