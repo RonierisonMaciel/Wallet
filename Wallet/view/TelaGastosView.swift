@@ -56,9 +56,10 @@ struct TelaGastosView: View {
                     TextField("Buscar", text: $searchText)
                         .font(.system(size: 18))
                         .padding(12)
-                        .background(Color.white)
+                        .background(Color.white.opacity(0.5))
                         .cornerRadius(15)
                         .padding(.horizontal)
+                        .foregroundColor(.black)
                 }
                 .padding(.top, 20)
 

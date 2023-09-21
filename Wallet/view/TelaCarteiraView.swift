@@ -21,7 +21,7 @@ struct TelaCarteiraView: View {
                     TextField("Adicionar Valor", text: $valorEntrada)
                         .keyboardType(.decimalPad)
                         .padding()
-                        .background(Color.white.opacity(0.7))
+                        .background(Color.white.opacity(0.2))
                         .cornerRadius(10)
                         .foregroundColor(.black)
 
