@@ -10,6 +10,8 @@ class Carteira: ObservableObject {
     @AppStorage("saldoOriginal") private(set) var saldoOriginal: Double = 0.0
     private(set) var gastosTotais: Double = 0.0
     @Published var showError: Bool = false
+    @Published var gastoSelecionado: Gasto?
+    @Published var gastoSelecionadoIndex: Int?
     @Published var errorMessage: String = ""
     @Published private(set) var gastos: [Gasto] {
         didSet {
