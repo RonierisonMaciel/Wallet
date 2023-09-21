@@ -4,25 +4,24 @@ struct TelaCarteiraView: View {
     @EnvironmentObject var carteira: Carteira
     @State private var valorEntrada: String = ""
     @State private var showingActionSheet = false
-    @State private var showingModal = false
     @State private var showError = false
 
     var body: some View {
         NavigationView {
             ZStack {
-                LinearGradient(gradient: Gradient(colors: [Color.black, Color.blue.opacity(0.6)]), startPoint: .top, endPoint: .bottom)
-                            .edgesIgnoringSafeArea(.all)
+                LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.8), Color.purple.opacity(0.8)]), startPoint: .top, endPoint: .bottom)
+                    .edgesIgnoringSafeArea(.all)
                 
                 VStack(spacing: 20) {
                     Text("Saldo na Carteira: R$ \(carteira.saldo, specifier: "%.2f")")
-                        .font(Font.custom("AvenirNext-DemiBold", size: 25))
+                        .font(.system(size: 25, weight: .bold, design: .rounded))
                         .foregroundColor(.white)
                         .padding()
 
                     TextField("Adicionar Valor", text: $valorEntrada)
                         .keyboardType(.decimalPad)
                         .padding()
-                        .background(Color.white)
+                        .background(Color.white.opacity(0.7))
                         .cornerRadius(10)
                         .foregroundColor(.black)
 
@@ -33,7 +32,7 @@ struct TelaCarteiraView: View {
                         } else {
                             showError = true
                         }
-                    }, icon: "plus.circle.fill", text: "Adicionar Valor", color: .blue)
+                    }, icon: "plus.circle.fill", text: "Adicionar Valor", color: .accentColor)
                     .padding(.top, 50)
                     .alert(isPresented: $showError) {
                         Alert(title: Text("Erro"), message: Text("Valor inválido. Por favor, insira um valor válido."), dismissButton: .default(Text("Entendi")))
@@ -55,7 +54,6 @@ struct TelaCarteiraView: View {
                     }
                 }
                 .padding()
-                .navigationBarTitle(Text("Carteira"), displayMode: .inline)
             }
         }
     }
