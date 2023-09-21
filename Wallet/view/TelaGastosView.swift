@@ -5,8 +5,6 @@ struct TelaGastosView: View {
     @State private var isSheetPresented = false
     @State private var isEditingExpense = false
     @State private var searchText = ""
-    @State private var gastoSelecionado: Gasto?
-    @State private var gastoSelecionadoIndex: Int?
 
     var total: Double {
         carteira.gastos.reduce(0) { $0 + $1.valor }
@@ -76,8 +74,8 @@ struct TelaGastosView: View {
                                             .foregroundColor(.gray)
                                     }
                                     .onTapGesture {
-                                        self.gastoSelecionado = gasto
-                                        self.gastoSelecionadoIndex = carteira.gastos.firstIndex(where: { $0.id == gasto.id })
+                                        self.carteira.gastoSelecionado = gasto
+                                        self.carteira.gastoSelecionadoIndex = carteira.gastos.firstIndex(where: { $0.id == gasto.id })
                                         self.isEditingExpense = true
                                         self.isSheetPresented = true
                                     }
@@ -116,7 +114,7 @@ struct TelaGastosView: View {
                     Image(systemName: "plus")
                 })
                 .fullScreenCover(isPresented: $isSheetPresented) {
-                    if self.isEditingExpense, let gastoParaEditar = self.gastoSelecionado, let gastoIndex = self.gastoSelecionadoIndex {
+                    if self.isEditingExpense, let gastoParaEditar = self.carteira.gastoSelecionado, let gastoIndex = self.carteira.gastoSelecionadoIndex {
                         EditarGastoView(gastoParaEditar: gastoParaEditar, index: gastoIndex).environmentObject(self.carteira)
                     } else {
                         TelaNovoGastoView().environmentObject(self.carteira)
