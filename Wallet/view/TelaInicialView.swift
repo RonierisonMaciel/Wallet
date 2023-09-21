@@ -9,77 +9,108 @@ struct TelaInicialView: View {
     @State private var arquivoParaCompartilhar: URL?
     @State private var isSharing = false
     @State private var isChoosingExportFormat = false
+
+    struct InfoCardView: View {
+        let icon: String
+        let value: Double
+        let label: String
+
+        var body: some View {
+            VStack(spacing: 10) {
+                Image(systemName: icon)
+                    .font(.largeTitle)
+                    .foregroundColor(.white)
+                
+                Text(String(format: "%.2f", value))
+                    .font(.title3)
+                    .foregroundColor(.white)
+                
+                Text(label)
+                    .font(.headline)
+                    .foregroundColor(.white)
+            }
+            .padding()
+            .frame(width: 100, height: 130)
+            .background(Color.black.opacity(0.5))
+            .cornerRadius(15)
+        }
+    }
+
     
     var body: some View {
         GeometryReader { geometry in
-            VStack(alignment: .center, spacing: 20) {
-                Text("Carteira de bolso!")
-                    .font(Font.custom("AvenirNext-Bold", size: 40))
-                    .foregroundColor(.white)
-                    .padding()
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.9), Color.purple.opacity(0.7)]), startPoint: .top, endPoint: .bottom)
+                    .edgesIgnoringSafeArea(.all)
                 
-                Text("Saldo na carteira: R$ \(carteira.saldo, specifier: "%.2f")")
-                    .font(Font.custom("AvenirNext-DemiBold", size: 25))
-                    .foregroundColor(.white)
-                    .padding()
-                
-                HStack {
-                    InfoCardView(icon: "arrow.down.circle", value: carteira.gastos.map({ $0.valor }).reduce(0, +), label: "Total")
-                    InfoCardView(icon: "arrow.2.circlepath", value: carteira.gastos.isEmpty ? 0 : carteira.gastos.map({ $0.valor }).reduce(0, +) / Double(carteira.gastos.count), label: "Médio")
-                    InfoCardView(icon: "arrow.up.circle", value: carteira.gastos.map({ $0.valor }).max() ?? 0, label: "Maior")
-                }
-                .font(.title3)
-                .padding(.horizontal)
-                
-                LazyHStack(spacing: 20) {
-                    CustomNavigationButtonView(destination: TelaGastosView().environmentObject(carteira), icon: "arrow.down", text: "Gastos", color: .blue)
-                    CustomNavigationButtonView(destination: TelaCarteiraView().environmentObject(carteira), icon: "arrow.up", text: "Carteira", color: .blue)
-                }
-                .frame(maxWidth: .infinity)
-                .padding(.horizontal)
-                
-                if !carteira.gastos.isEmpty {
-                    CustomActionButtonView(action: {
-                        self.isChoosingExportFormat = true
-                    }, icon: "square.and.arrow.up.fill", text: "Exportar", color: .purple)
-                    .padding(.top, 50)
-                    .actionSheet(isPresented: $isChoosingExportFormat) {
-                        ActionSheet(title: Text("Escolha o formato de exportação"), buttons: [
-                            .default(Text("CSV")) {
-                                if let fileURL = self.exportService.exportGastos(gastos: self.carteira.gastos, format: .csv) {
-                                    self.arquivoParaCompartilhar = fileURL
-                                    self.isSharing = true
-                                } else {
-                                    print("Falha ao criar o arquivo de exportação CSV.")
-                                }
-                            },
-                            .default(Text("JSON")) {
-                                if let fileURL = self.exportService.exportGastos(gastos: self.carteira.gastos, format: .json) {
-                                    self.arquivoParaCompartilhar = fileURL
-                                    self.isSharing = true
-                                } else {
-                                    print("Falha ao criar o arquivo de exportação JSON.")
-                                }
-                            },
-                            .cancel()
-                        ])
+                VStack(alignment: .center, spacing: 20) {
+                    Text("Carteira de bolso!")
+                        .font(.system(size: 40, weight: .bold, design: .rounded))
+                        .foregroundColor(.white)
+                        .padding()
+                    
+                    Text("Saldo na carteira: R$ \(carteira.saldo, specifier: "%.2f")")
+                        .font(.system(size: 25, weight: .medium, design: .rounded))
+                        .foregroundColor(.white)
+                        .padding()
+                    
+                    HStack(spacing: geometry.size.width * 0.05) {
+                        InfoCardView(icon: "arrow.down.circle", value: carteira.gastos.map({ $0.valor }).reduce(0, +), label: "Total")
+                            .frame(width: geometry.size.width * 0.25)
+                        InfoCardView(icon: "arrow.2.circlepath", value: carteira.gastos.isEmpty ? 0 : carteira.gastos.map({ $0.valor }).reduce(0, +) / Double(carteira.gastos.count), label: "Médio")
+                            .frame(width: geometry.size.width * 0.25)
+                        InfoCardView(icon: "arrow.up.circle", value: carteira.gastos.map({ $0.valor }).max() ?? 0, label: "Maior")
+                            .frame(width: geometry.size.width * 0.25)
                     }
-                    .sheet(isPresented: $isSharing, onDismiss: {
-                        arquivoParaCompartilhar = nil
-                    }) {
-                        if let fileURL = arquivoParaCompartilhar {
-                            ActivityViewController(activityItems: [fileURL])
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(.horizontal)
+                    
+                    LazyHStack(spacing: 20) {
+                        CustomNavigationButtonView(destination: TelaGastosView().environmentObject(carteira), icon: "arrow.down", text: "Gastos", color: Color.purple.opacity(0.8))
+                        CustomNavigationButtonView(destination: TelaCarteiraView().environmentObject(carteira), icon: "arrow.up", text: "Carteira", color: Color.blue.opacity(0.8))
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.horizontal)
+                    
+                    if !carteira.gastos.isEmpty {
+                        CustomActionButtonView(action: {
+                            self.isChoosingExportFormat = true
+                        }, icon: "square.and.arrow.up.fill", text: "Exportar", color: .accentColor)
+                        .padding(.top, 50)
+                        .actionSheet(isPresented: $isChoosingExportFormat) {
+                            ActionSheet(title: Text("Escolha o formato de exportação"), buttons: [
+                                .default(Text("CSV")) {
+                                    if let fileURL = self.exportService.exportGastos(gastos: self.carteira.gastos, format: .csv) {
+                                        self.arquivoParaCompartilhar = fileURL
+                                        self.isSharing = true
+                                    } else {
+                                        print("Falha ao criar o arquivo de exportação CSV.")
+                                    }
+                                },
+                                .default(Text("JSON")) {
+                                    if let fileURL = self.exportService.exportGastos(gastos: self.carteira.gastos, format: .json) {
+                                        self.arquivoParaCompartilhar = fileURL
+                                        self.isSharing = true
+                                    } else {
+                                        print("Falha ao criar o arquivo de exportação JSON.")
+                                    }
+                                },
+                                .cancel()
+                            ])
+                        }
+                        .sheet(isPresented: $isSharing, onDismiss: {
+                            arquivoParaCompartilhar = nil
+                        }) {
+                            if let fileURL = arquivoParaCompartilhar {
+                                ActivityViewController(activityItems: [fileURL])
+                            }
                         }
                     }
+                    
+                    Spacer()
                 }
-                
-                Spacer()
+                .padding()
             }
-            .padding()
-            .background(
-                LinearGradient(gradient: Gradient(colors: [Color.black, Color.blue.opacity(0.6)]), startPoint: .top, endPoint: .bottom)
-                    .edgesIgnoringSafeArea(.all)
-            )
         }
     }
 }
@@ -113,8 +144,8 @@ struct CustomNavigationButtonView<Content: View>: View {
             .padding()
             .frame(minWidth: 0, maxWidth: .infinity)
             .background(color)
-            .cornerRadius(40)
-            .font(.title2)
+            .cornerRadius(15)
+            .font(.headline)
         }
     }
 }
